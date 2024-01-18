@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: sample-spring-modulith
+  profiles:
+    active: rdb
+management:
+  tracing:
+    sampling.probability: 1.0
+    enabled: false
+management.endpoints.web.exposure.include: "*"
