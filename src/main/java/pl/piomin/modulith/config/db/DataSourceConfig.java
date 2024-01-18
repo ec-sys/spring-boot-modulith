@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy;
 
@@ -15,23 +16,24 @@ import java.util.Map;
 import java.util.Properties;
 
 @Configuration
+@Profile("replication")
 public class DataSourceConfig {
 
     @Value("${db.driverClassName}")
     private String driverClassName;
 
-    @Value("${db.url-master}")
+    @Value("${db.master.url}")
     private String urlMaster;
-    @Value("${db.username-master}")
+    @Value("${db.master.username}")
     private String usernameMaster;
-    @Value("${db.password-master}")
+    @Value("${db.master.password}")
     private String passwordMaster;
 
-    @Value("${db.url-slave}")
+    @Value("${db.slave.url}")
     private String urlSlave;
-    @Value("${db.username-slave}")
+    @Value("${db.slave.username}")
     private String usernameSlave;
-    @Value("${db.password-slave}")
+    @Value("${db.slave.password}")
     private String passwordSlave;
 
     @Bean
@@ -42,7 +44,6 @@ public class DataSourceConfig {
     @Bean
     public Properties hibernateProperties() {
         Properties hibernateProp = new Properties();
-        hibernateProp.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         hibernateProp.put("hibernate.hbm2ddl.auto", "none");
         hibernateProp.put("hibernate.show_sql", true);
         return hibernateProp;

@@ -2,7 +2,7 @@ spring:
   application:
     name: sample-spring-modulith
   profiles:
-    active: rdb
+    active: replication
 management:
   tracing:
     sampling.probability: 1.0

@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: ${MYSQL_URL:jdbc:mysql://localhost:3306/db_employee}
-    username: ${MYSQL_USER_NAME:root}
-    password: ${MYSQL_PASSWORD:root123}
+    username: ${MYSQL_USERNAME:tit}
+    password: ${MYSQL_PASSWORD:dangtit90}
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
