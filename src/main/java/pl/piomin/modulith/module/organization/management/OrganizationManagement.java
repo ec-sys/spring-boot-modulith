@@ -12,6 +12,7 @@ import pl.piomin.modulith.module.employee.EmployeeInternalAPI;
 import pl.piomin.modulith.module.organization.OrganizationDTO;
 import pl.piomin.modulith.module.organization.OrganizationExternalAPI;
 import pl.piomin.modulith.module.organization.mapper.OrganizationMapper;
+import pl.piomin.modulith.module.organization.model.Organization;
 import pl.piomin.modulith.module.organization.repository.OrganizationRepository;
 
 import java.util.List;
@@ -39,7 +40,8 @@ public class OrganizationManagement implements OrganizationExternalAPI {
 
     @Override
     public OrganizationDTO findByIdWithEmployees(Long id) {
-        OrganizationDTO dto = repository.findDTOById(id);
+        Organization obj = repository.findById(id).get();
+        OrganizationDTO dto = new OrganizationDTO(obj.getId(), obj.getName(), obj.getAddress());
         List<EmployeeDTO> dtos = employeeInternalAPI.getEmployeesByOrganizationId(id);
         dto.employees().addAll(dtos);
         return dto;
@@ -47,7 +49,8 @@ public class OrganizationManagement implements OrganizationExternalAPI {
 
     @Override
     public OrganizationDTO findByIdWithDepartments(Long id) {
-        OrganizationDTO dto = repository.findDTOById(id);
+        Organization obj = repository.findById(id).get();
+        OrganizationDTO dto = new OrganizationDTO(obj.getId(), obj.getName(), obj.getAddress());
         List<DepartmentDTO> dtos = departmentInternalAPI.getDepartmentsByOrganizationId(id);
         dto.departments().addAll(dtos);
         return dto;
@@ -55,7 +58,8 @@ public class OrganizationManagement implements OrganizationExternalAPI {
 
     @Override
     public OrganizationDTO findByIdWithDepartmentsAndEmployees(Long id) {
-        OrganizationDTO dto = repository.findDTOById(id);
+        Organization obj = repository.findById(id).get();
+        OrganizationDTO dto = new OrganizationDTO(obj.getId(), obj.getName(), obj.getAddress());
         List<DepartmentDTO> dtos = departmentInternalAPI.getDepartmentsByOrganizationIdWithEmployees(id);
         dto.departments().addAll(dtos);
         return dto;

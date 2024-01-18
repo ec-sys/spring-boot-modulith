@@ -10,10 +10,12 @@ import pl.piomin.modulith.module.department.DepartmentDTO;
 import pl.piomin.modulith.module.department.DepartmentExternalAPI;
 import pl.piomin.modulith.module.department.DepartmentInternalAPI;
 import pl.piomin.modulith.module.department.mapper.DepartmentMapper;
+import pl.piomin.modulith.module.department.model.Department;
 import pl.piomin.modulith.module.department.repository.DepartmentRepository;
 import pl.piomin.modulith.module.employee.EmployeeDTO;
 import pl.piomin.modulith.module.employee.EmployeeInternalAPI;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,14 +36,15 @@ public class DepartmentManagement implements DepartmentInternalAPI, DepartmentEx
 
     @Override
     public DepartmentDTO getDepartmentByIdWithEmployees(Long id) {
-        DepartmentDTO d = repository.findDTOById(id);
+        Department department = repository.findById(id).get();
+        DepartmentDTO dto = new DepartmentDTO(department.getId(), department.getOrganizationId(), department.getName());
         List<EmployeeDTO> dtos = employeeInternalAPI.getEmployeesByDepartmentId(id);
-        d.employees().addAll(dtos);
-        return d;
+        dto.employees().addAll(dtos);
+        return dto;
     }
 
     @ApplicationModuleListener
-    void onNewOrganizationEvent(OrganizationAddEvent event) {
+     void onNewOrganizationEvent(OrganizationAddEvent event) {
         LOG.info("onNewOrganizationEvent(orgId={})", event.getId());
         add(new DepartmentDTO(null, event.getId(), "HR"));
         add(new DepartmentDTO(null, event.getId(), "Management"));
@@ -62,12 +65,16 @@ public class DepartmentManagement implements DepartmentInternalAPI, DepartmentEx
 
     @Override
     public List<DepartmentDTO> getDepartmentsByOrganizationId(Long id) {
-        return repository.findByOrganizationId(id);
+        List<DepartmentDTO> dtoList = new ArrayList<>();
+        repository.findByOrganizationId(id).forEach(item -> {
+            dtoList.add(new DepartmentDTO(item.getId(), item.getOrganizationId(), item.getName()));
+        });
+        return dtoList;
     }
 
     @Override
     public List<DepartmentDTO> getDepartmentsByOrganizationIdWithEmployees(Long id) {
-        List<DepartmentDTO> departments = repository.findByOrganizationId(id);
+        List<DepartmentDTO> departments = getDepartmentsByOrganizationId(id);
         for (DepartmentDTO dep : departments) {
             dep.employees().addAll(employeeInternalAPI.getEmployeesByDepartmentId(dep.id()));
         }

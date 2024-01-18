@@ -44,7 +44,7 @@ public class DataSourceConfig {
     @Bean
     public Properties hibernateProperties() {
         Properties hibernateProp = new Properties();
-        hibernateProp.put("hibernate.hbm2ddl.auto", "none");
+        hibernateProp.put("hibernate.hbm2ddl.auto", "update");
         hibernateProp.put("hibernate.show_sql", true);
         return hibernateProp;
     }

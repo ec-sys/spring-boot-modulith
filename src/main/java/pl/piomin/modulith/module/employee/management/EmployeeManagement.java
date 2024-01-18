@@ -31,12 +31,20 @@ public class EmployeeManagement implements EmployeeInternalAPI, EmployeeExternal
 
     @Override
     public List<EmployeeDTO> getEmployeesByDepartmentId(Long departmentId) {
-        return repository.findByDepartmentId(departmentId);
+        List<EmployeeDTO> dtoList = new ArrayList<>();
+        repository.findByDepartmentId(departmentId).forEach(item -> {
+            dtoList.add(new EmployeeDTO(item.getId(), item.getOrganizationId(), item.getDepartmentId(), item.getName(), item.getAge(), item.getPosition()));
+        });
+        return dtoList;
     }
 
     @Override
     public List<EmployeeDTO> getEmployeesByOrganizationId(Long id) {
-        return repository.findByOrganizationId(id);
+        List<EmployeeDTO> dtoList = new ArrayList<>();
+        repository.findByOrganizationId(id).forEach(item -> {
+            dtoList.add(new EmployeeDTO(item.getId(), item.getOrganizationId(), item.getDepartmentId(), item.getName(), item.getAge(), item.getPosition()));
+        });
+        return dtoList;
     }
 
     @Override

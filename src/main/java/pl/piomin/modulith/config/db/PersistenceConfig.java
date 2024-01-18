@@ -61,6 +61,7 @@ public class PersistenceConfig {
     public PersistenceUnitManager persistenceUnitManager() {
         DefaultPersistenceUnitManager persistenceUnitManager = new DefaultPersistenceUnitManager();
         persistenceUnitManager.setPackagesToScan(
+                "org.springframework.modulith.events.jpa",
                 SpringModulith.class.getPackage().getName()
         );
         persistenceUnitManager.setDefaultDataSource(dataSource);

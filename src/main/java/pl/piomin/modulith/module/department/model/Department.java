@@ -1,11 +1,9 @@
 package pl.piomin.modulith.module.department.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "departments")
 public class Department {
 
     @Id
