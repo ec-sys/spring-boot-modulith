@@ -20,9 +20,9 @@ import java.util.List;
 public class DepartmentManagement implements DepartmentInternalAPI, DepartmentExternalAPI {
 
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentManagement.class);
-    private DepartmentRepository repository;
-    private EmployeeInternalAPI employeeInternalAPI;
-    private DepartmentMapper mapper;
+    private final DepartmentRepository repository;
+    private final EmployeeInternalAPI employeeInternalAPI;
+    private final DepartmentMapper mapper;
 
     public DepartmentManagement(DepartmentRepository repository,
                                 EmployeeInternalAPI employeeInternalAPI,
@@ -68,7 +68,7 @@ public class DepartmentManagement implements DepartmentInternalAPI, DepartmentEx
     @Override
     public List<DepartmentDTO> getDepartmentsByOrganizationIdWithEmployees(Long id) {
         List<DepartmentDTO> departments = repository.findByOrganizationId(id);
-        for (DepartmentDTO dep: departments) {
+        for (DepartmentDTO dep : departments) {
             dep.employees().addAll(employeeInternalAPI.getEmployeesByDepartmentId(dep.id()));
         }
         return departments;

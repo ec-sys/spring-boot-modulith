@@ -83,12 +83,11 @@ public class DataSourceConfig {
             HikariConfig hikariConfig = new HikariConfig();
             hikariConfig.setDriverClassName(driverClassName);
 
-            if(DbType.MASTER.equals(dbType)) {
+            if (DbType.MASTER.equals(dbType)) {
                 hikariConfig.setJdbcUrl(urlMaster);
                 hikariConfig.setUsername(usernameMaster);
                 hikariConfig.setPassword(passwordMaster);
-            }
-            else {
+            } else {
                 hikariConfig.setJdbcUrl(urlSlave);
                 hikariConfig.setUsername(usernameSlave);
                 hikariConfig.setPassword(passwordSlave);

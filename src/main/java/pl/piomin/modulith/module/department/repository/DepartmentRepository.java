@@ -12,17 +12,17 @@ import java.util.List;
 public interface DepartmentRepository extends CrudRepository<Department, Long> {
 
     @Query("""
-           SELECT new pl.piomin.modulith.module.department.DepartmentDTO(d.id, d.organizationId, d.name)
-           FROM Department d
-           WHERE d.id = :id
-           """)
+            SELECT new pl.piomin.modulith.module.department.DepartmentDTO(d.id, d.organizationId, d.name)
+            FROM Department d
+            WHERE d.id = :id
+            """)
     DepartmentDTO findDTOById(Long id);
 
     @Query("""
-           SELECT new pl.piomin.modulith.module.department.DepartmentDTO(d.id, d.organizationId, d.name)
-           FROM Department d
-           WHERE d.organizationId = :organizationId
-           """)
+            SELECT new pl.piomin.modulith.module.department.DepartmentDTO(d.id, d.organizationId, d.name)
+            FROM Department d
+            WHERE d.organizationId = :organizationId
+            """)
     List<DepartmentDTO> findByOrganizationId(Long organizationId);
 
     void deleteByOrganizationId(Long organizationId);

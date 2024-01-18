@@ -8,5 +8,6 @@ import pl.piomin.modulith.module.organization.model.Organization;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface OrganizationMapper {
     OrganizationDTO organizationToOrganizationDTO(Organization organization);
+
     Organization organizationDTOToOrganization(OrganizationDTO organizationDTO);
 }

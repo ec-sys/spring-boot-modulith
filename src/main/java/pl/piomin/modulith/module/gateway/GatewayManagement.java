@@ -5,8 +5,8 @@ import pl.piomin.modulith.module.department.DepartmentDTO;
 import pl.piomin.modulith.module.department.DepartmentExternalAPI;
 import pl.piomin.modulith.module.employee.EmployeeDTO;
 import pl.piomin.modulith.module.employee.EmployeeExternalAPI;
-import pl.piomin.modulith.module.organization.OrganizationExternalAPI;
 import pl.piomin.modulith.module.organization.OrganizationDTO;
+import pl.piomin.modulith.module.organization.OrganizationExternalAPI;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import java.util.List;
 @RequestMapping("/api")
 public class GatewayManagement {
 
-    private DepartmentExternalAPI departmentExternalAPI;
-    private EmployeeExternalAPI employeeExternalAPI;
-    private OrganizationExternalAPI organizationExternalAPI;
+    private final DepartmentExternalAPI departmentExternalAPI;
+    private final EmployeeExternalAPI employeeExternalAPI;
+    private final OrganizationExternalAPI organizationExternalAPI;
 
     public GatewayManagement(DepartmentExternalAPI departmentExternalAPI,
                              EmployeeExternalAPI employeeExternalAPI,

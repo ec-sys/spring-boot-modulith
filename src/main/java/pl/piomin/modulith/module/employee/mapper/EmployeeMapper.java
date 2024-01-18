@@ -8,5 +8,6 @@ import pl.piomin.modulith.module.employee.model.Employee;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface EmployeeMapper {
     EmployeeDTO employeeToEmployeeDTO(Employee employee);
+
     Employee employeeDTOToEmployee(EmployeeDTO employeeDTO);
 }

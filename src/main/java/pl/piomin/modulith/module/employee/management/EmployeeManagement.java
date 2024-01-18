@@ -20,8 +20,8 @@ import java.util.List;
 public class EmployeeManagement implements EmployeeInternalAPI, EmployeeExternalAPI {
 
     private static final Logger LOG = LoggerFactory.getLogger(EmployeeManagement.class);
-    private EmployeeRepository repository;
-    private EmployeeMapper mapper;
+    private final EmployeeRepository repository;
+    private final EmployeeMapper mapper;
 
     public EmployeeManagement(EmployeeRepository repository,
                               EmployeeMapper mapper) {

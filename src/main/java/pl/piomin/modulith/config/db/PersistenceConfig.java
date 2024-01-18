@@ -38,7 +38,7 @@ public class PersistenceConfig {
     Properties hibernateProperties;
 
     @Bean
-    public EntityManagerFactory entityManagerFactory(){
+    public EntityManagerFactory entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setPersistenceUnitManager(persistenceUnitManager());
         factoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
@@ -51,8 +51,9 @@ public class PersistenceConfig {
     public PlatformTransactionManager transactionManager() {
         return new JpaTransactionManager(entityManagerFactory());
     }
+
     @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 

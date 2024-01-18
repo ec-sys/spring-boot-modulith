@@ -9,10 +9,10 @@ import pl.piomin.modulith.module.department.DepartmentDTO;
 import pl.piomin.modulith.module.department.DepartmentInternalAPI;
 import pl.piomin.modulith.module.employee.EmployeeDTO;
 import pl.piomin.modulith.module.employee.EmployeeInternalAPI;
-import pl.piomin.modulith.module.organization.OrganizationExternalAPI;
-import pl.piomin.modulith.module.organization.repository.OrganizationRepository;
 import pl.piomin.modulith.module.organization.OrganizationDTO;
+import pl.piomin.modulith.module.organization.OrganizationExternalAPI;
 import pl.piomin.modulith.module.organization.mapper.OrganizationMapper;
+import pl.piomin.modulith.module.organization.repository.OrganizationRepository;
 
 import java.util.List;
 

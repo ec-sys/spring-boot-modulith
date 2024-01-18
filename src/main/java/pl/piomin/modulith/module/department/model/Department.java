@@ -14,7 +14,8 @@ public class Department {
     private Long organizationId;
     private String name;
 
-    public Department() {}
+    public Department() {
+    }
 
     public Department(Long organizationId, String name) {
         this.organizationId = organizationId;
