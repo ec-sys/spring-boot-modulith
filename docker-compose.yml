@@ -1,7 +1,9 @@
 version: '2'
 
 services:
+  # master
   mysql-master:
+    container_name: mysql-master
     image: 'bitnami/mysql:8.0'
     ports:
       - '3306:3306'
@@ -13,7 +15,10 @@ services:
       - MYSQL_USER=tit
       - MYSQL_PASSWORD=dangtit90
       - MYSQL_DATABASE=db_employee
-  mysql-slave:
+
+  # slave-1
+  mysql-slave-1:
+    container_name: mysql-slave-1
     image: 'bitnami/mysql:8.0'
     ports:
       - '3307:3306'
@@ -23,6 +28,28 @@ services:
       - MYSQL_REPLICATION_MODE=slave
       - MYSQL_REPLICATION_USER=repl_user
       - MYSQL_REPLICATION_PASSWORD=repl_password
+      - MYSQL_USER=tit
+      - MYSQL_PASSWORD=dangtit90
+      - MYSQL_DATABASE=db_employee
+      - MYSQL_MASTER_HOST=mysql-master
+      - MYSQL_MASTER_PORT_NUMBER=3306
+      - MYSQL_MASTER_ROOT_PASSWORD=master_root_password
+
+  # slave-2
+  mysql-slave-2:
+    container_name: mysql-slave-2
+    image: 'bitnami/mysql:8.0'
+    ports:
+      - '3308:3306'
+    depends_on:
+      - mysql-master
+    environment:
+      - MYSQL_REPLICATION_MODE=slave
+      - MYSQL_REPLICATION_USER=repl_user
+      - MYSQL_REPLICATION_PASSWORD=repl_password
+      - MYSQL_USER=tit
+      - MYSQL_PASSWORD=dangtit90
+      - MYSQL_DATABASE=db_employee
       - MYSQL_MASTER_HOST=mysql-master
       - MYSQL_MASTER_PORT_NUMBER=3306
       - MYSQL_MASTER_ROOT_PASSWORD=master_root_password

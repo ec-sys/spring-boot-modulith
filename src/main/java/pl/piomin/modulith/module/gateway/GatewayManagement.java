@@ -17,13 +17,16 @@ public class GatewayManagement {
     private final DepartmentExternalAPI departmentExternalAPI;
     private final EmployeeExternalAPI employeeExternalAPI;
     private final OrganizationExternalAPI organizationExternalAPI;
+    private final GatewayService gatewayService;
 
     public GatewayManagement(DepartmentExternalAPI departmentExternalAPI,
                              EmployeeExternalAPI employeeExternalAPI,
-                             OrganizationExternalAPI organizationExternalAPI) {
+                             OrganizationExternalAPI organizationExternalAPI,
+                             GatewayService gatewayService) {
         this.departmentExternalAPI = departmentExternalAPI;
         this.employeeExternalAPI = employeeExternalAPI;
         this.organizationExternalAPI = organizationExternalAPI;
+        this.gatewayService = gatewayService;
     }
 
 
@@ -37,9 +40,19 @@ public class GatewayManagement {
         return organizationExternalAPI.findByIdWithDepartmentsAndEmployees(id);
     }
 
+    @GetMapping("/organizations/{id}/only-organization")
+    public OrganizationDTO apiGetOneOrganization(@PathVariable Long id) {
+        return gatewayService.getOrganization(id);
+    }
+
     @PostMapping("/organizations")
     public OrganizationDTO apiAddOrganization(@RequestBody OrganizationDTO o) {
         return organizationExternalAPI.add(o);
+    }
+
+    @PostMapping("/organizations/add-one")
+    public long apiAddOneOrganization(@RequestBody OrganizationDTO o) {
+        return gatewayService.createOrganization(o);
     }
 
     @PostMapping("/employees")
